@@ -9,17 +9,30 @@ $(document).ready(function () {
 
     //Putting the Last City on Page//
     function pageStart() {
-        var currentCity = localStorage.getItem("city")
+        var userCityInput = localStorage.getItem("city")
         //console.log(currentCity) //null until searched for 
 
-        var split = currentCity.split(", ");
+        var cityBtns = userCityInput.split(", ");
         // console.log(split); //making array into string 
-        for (i = 0; i < split.length; i++) {
+        for (i = 0; i < cityBtns.length; i++) {
+            var specificSearch = userCityInput[i].length
+            if (specificSearch > 0){
+                console.log("value not null");
             var addCity = $("<button>").addClass("btn-block btn btn large btn-light")
-            addCity.text(split[i]);
-            $("#buttons").append(addCity)
-        }
-        var lastCity = split[split.length - 1];
+            addCity.text(cityBtns[i]);
+            $("#buttons").append(addCity);
+            }; 
+            
+            //console.log(userCityInput);
+            //if the users search input is invaild or null then do not display the button 
+            //*grab the users input and then check to see if it's valid 
+            //*form control for only cities that are within the data of the API 
+            //*Small cities that don't come up 
+            //*user clicks search without an input 
+            //*spelling error turns up no city 
+            // if ( currentCity === "null")
+        };
+        var lastCity = cityBtns[cityBtns.length - 1];
         searchCity(lastCity);
         dailyForecast(lastCity);
     }
@@ -83,7 +96,7 @@ $(document).ready(function () {
         var saveCity = localStorage.getItem("city");
         saveCity = $("<button>").addClass("btn-block btn btn large btn-light")
         saveCity.text(city);
-        $("#buttons").append(saveCity)
+        // $("#buttons").append(saveCity)
         searchCity(city);
         dailyForecast(city)
     });
